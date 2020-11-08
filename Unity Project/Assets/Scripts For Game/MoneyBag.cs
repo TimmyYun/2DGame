@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class MoneyBag : MonoBehaviour
 {
-    public Text text;
+    public TMP_Text text;
 
-    void SetMaxMoney(int maxMoney)
+    public void SetMaxMoney(int maxMoney)
     {
         text.text = "0/" + maxMoney;
     }
 
-    void SetMoney(int CurrentMoney, int MaxMoney)
+    public void SetMoney(int CurrentMoney, int MaxMoney)
     {
-        text.text = CurrentMoney + "/" + MaxMoney;
+        if(CurrentMoney <= MaxMoney)
+        {
+            text.text = CurrentMoney + "/" + MaxMoney;
+        }
     }
 }
