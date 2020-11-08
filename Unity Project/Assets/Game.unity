@@ -1811,7 +1811,7 @@ GameObject:
   - component: {fileID: 744659279}
   - component: {fileID: 744659278}
   - component: {fileID: 744659277}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: King
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2012,7 +2012,7 @@ MonoBehaviour:
   healthBar: {fileID: 1660596035}
   moneyBag: {fileID: 514687780}
   nextcampfirecheck: 0
-  nextcampinterval: 0.1
+  nextcampinterval: 2
 --- !u!1 &810044093
 GameObject:
   m_ObjectHideFlags: 0
@@ -4284,7 +4284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1160511482}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: CeilingCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4628,7 +4628,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1307558325}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5800,7 +5800,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1955119897}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: BuildCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6327,6 +6327,10 @@ PrefabInstance:
       propertyPath: CampfireBottomMid
       value: 
       objectReference: {fileID: 36719438}
+    - target: {fileID: 5754741070127608638, guid: 96a984cd810c4f84d9ebcd61f506d53f, type: 3}
+      propertyPath: PlayerLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 5754741070155399145, guid: 96a984cd810c4f84d9ebcd61f506d53f, type: 3}
       propertyPath: m_Name
       value: Campfire
