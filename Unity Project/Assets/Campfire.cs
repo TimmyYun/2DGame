@@ -8,8 +8,10 @@ public class Campfire : MonoBehaviour
     public GameObject Wheel1;
     public GameObject Wheel2;
     public GameObject Wheel3;
+    public GameObject NextBuilding;
 
     public Transform CampfirePoint;
+    public Transform CampfireBottomMid;
     public float CampfireRange = 1f;
     public LayerMask PlayerLayer;
     public float showInterfaceTime = 0.5f;
@@ -32,19 +34,27 @@ public class Campfire : MonoBehaviour
             if (Time.time >= nextshow)
             {
                 Interface.SetActive(false);
-                player.isOnCampfire = false;
-            }
-            if (Time.time >= nextshow)
-            {
                 Collider2D[] hitObjects = Physics2D.OverlapCircleAll(CampfirePoint.position, CampfireRange, PlayerLayer);
                 foreach (Collider2D Player in hitObjects)
                 {
                     Interface.SetActive(true);
-                    player.isOnCampfire = true;
                     nextshow = Time.time + showInterfaceTime;
                 }
             }
         }
+        if (player.isOnCampfire == true && isBuilt == false)
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                buildStructure();
+            }
+        }
+    }
+
+    public void buildStructure()
+    {
+        player.GetCoin(-1);
+        BuildOneStage();
     }
 
     public void BuildOneStage()
@@ -62,6 +72,7 @@ public class Campfire : MonoBehaviour
         {
             isBuilt = true;
             DestroyCampfire();
+            Instantiate(NextBuilding, CampfireBottomMid.position, CampfirePoint.rotation);
         }
     }
 
