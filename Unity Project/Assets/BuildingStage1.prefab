@@ -1977,6 +1977,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9188946253332021715}
+  - component: {fileID: -6435486228395377517}
   m_Layer: 0
   m_Name: BuildingStage1
   m_TagString: Untagged
@@ -2093,6 +2094,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6435486228395377517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9188946253332021712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6417c9639b868c648b32822352fadb93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9188946253456965082
 GameObject:
   m_ObjectHideFlags: 0

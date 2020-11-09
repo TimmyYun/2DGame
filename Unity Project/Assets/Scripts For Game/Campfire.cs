@@ -47,7 +47,6 @@ public class Campfire : MonoBehaviour
                 Collider2D[] hitObjects = Physics2D.OverlapCircleAll(CampfirePoint.position, CampfireRange, PlayerLayer);
                 foreach (Collider2D Player in hitObjects)
                 {
-
                     Interface.SetActive(true);
 
                     nextshow = Time.time + showInterfaceTime;

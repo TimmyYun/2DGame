@@ -12,14 +12,10 @@ public class PlayerAttributes : MonoBehaviour
 
     public HealthBarScript healthBar;
     public MoneyBag moneyBag;
-    public Transform buildCheck;
-    public float buildRange = 1f;
-    public LayerMask CampfireLayer;
+    public Transform SpawnPoint;
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(buildCheck.position, buildRange);
-    }
+    public GameObject Coin;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,11 +27,18 @@ public class PlayerAttributes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (CurrentMoney > 0 )
+            {
+            DropCoin();
+            }
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            TakeDamage(5);
+
         }
-        
+
     }
 
 
@@ -43,13 +46,26 @@ public class PlayerAttributes : MonoBehaviour
     {
         return CurrentMoney;
     }
+
     public void GetCoin(int value)
     {
-        if (CurrentMoney < MaxMoney)
+        if (value < 0)
         {
             CurrentMoney += value;
             moneyBag.SetMoney(CurrentMoney, MaxMoney);
         }
+        else if (CurrentMoney < MaxMoney)
+        {
+            CurrentMoney += value;
+            moneyBag.SetMoney(CurrentMoney, MaxMoney);
+        }
+
+    }
+
+    public void DropCoin()
+    {
+        Instantiate(Coin, SpawnPoint.position, SpawnPoint.rotation);
+        GetCoin(-1);
     }
 
     void TakeDamage(int damage)
@@ -57,5 +73,17 @@ public class PlayerAttributes : MonoBehaviour
         CurrentHealth -= damage;
 
         healthBar.SetHealth(CurrentHealth);
+    }
+
+    public bool IsFull()
+    {
+        if (CurrentMoney == MaxMoney)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
