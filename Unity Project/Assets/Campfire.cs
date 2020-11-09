@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Media;
 using UnityEngine;
 
 public class Campfire : MonoBehaviour
@@ -9,6 +11,7 @@ public class Campfire : MonoBehaviour
     public GameObject Wheel2;
     public GameObject Wheel3;
     public GameObject NextBuilding;
+    public GameObject CampfireSprite;
 
     public Transform CampfirePoint;
     public Transform CampfireBottomMid;
@@ -19,8 +22,7 @@ public class Campfire : MonoBehaviour
     public bool isBuilt = false;
     public int stagesofbuild = 0;
     public int maxstagesofbuild = 3;
-
-    public PlayerAttributes player;
+    private int numberofplayers = 0;
 
     void OnDrawGizmosSelected()
     {
@@ -33,29 +35,46 @@ public class Campfire : MonoBehaviour
         {
             if (Time.time >= nextshow)
             {
+
                 Interface.SetActive(false);
                 Collider2D[] hitObjects = Physics2D.OverlapCircleAll(CampfirePoint.position, CampfireRange, PlayerLayer);
                 foreach (Collider2D Player in hitObjects)
                 {
+
                     Interface.SetActive(true);
+
                     nextshow = Time.time + showInterfaceTime;
                 }
             }
         }
-        if (player.isOnCampfire == true && isBuilt == false)
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            if (Input.GetKeyDown(KeyCode.S))
+            Collider2D[] hitObjects = Physics2D.OverlapCircleAll(CampfirePoint.position, CampfireRange, PlayerLayer);
+            foreach (Collider2D Player in hitObjects)
             {
-                buildStructure();
+                numberofplayers++;
+                if (numberofplayers == 1)
+                {
+                    if (Player.GetComponent<PlayerAttributes>().GetCurrentMoney() > 0)
+                    {
+                        Player.GetComponent<PlayerAttributes>().GetCoin(-1);
+                        buildStructure();
+                    }
+                }
             }
+            numberofplayers = 0;
         }
     }
 
     public void buildStructure()
     {
-        player.GetCoin(-1);
-        BuildOneStage();
+        if (isBuilt == false)
+        {
+            BuildOneStage();
+        }
     }
+
+
 
     public void BuildOneStage()
     {
@@ -69,12 +88,18 @@ public class Campfire : MonoBehaviour
             Wheel2.SetActive(false);
         }
         if (stagesofbuild == maxstagesofbuild)
+
         {
             isBuilt = true;
-            DestroyCampfire();
             Instantiate(NextBuilding, CampfireBottomMid.position, CampfirePoint.rotation);
+            Instantiate(CampfireSprite, new Vector3(CampfireBottomMid.position.x + 20, CampfireBottomMid.position.y, CampfireBottomMid.position.z), CampfirePoint.rotation);
+            DestroyCampfire();
         }
     }
+
+          
+
+    
 
     public void DestroyCampfire()
     {
