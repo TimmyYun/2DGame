@@ -20,7 +20,7 @@ public class Campfire : MonoBehaviour
     public float showInterfaceTime = 0.5f;
     float nextshow = 0;
     public bool isBuilt = false;
-    public int stagesofbuild = 0;
+    private int stagesofbuild = 0;
     public int maxstagesofbuild = 3;
     private int numberofplayers = 0;
 
