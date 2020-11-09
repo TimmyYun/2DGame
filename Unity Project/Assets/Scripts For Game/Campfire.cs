@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Media;
 using UnityEngine;
 
 public class Campfire : MonoBehaviour
@@ -28,9 +27,17 @@ public class Campfire : MonoBehaviour
     {
         Gizmos.DrawWireSphere(CampfirePoint.position, CampfireRange);
     }
-
+    void Start()
+    {
+        if (stagesofbuild == 0)
+        {
+            Wheel1.SetActive(true);
+            Wheel2.SetActive(true);
+        }
+    }
     void Update()
     {
+
         if (isBuilt == false)
         {
             if (Time.time >= nextshow)
@@ -79,6 +86,7 @@ public class Campfire : MonoBehaviour
     public void BuildOneStage()
     {
         stagesofbuild = stagesofbuild + 1;
+
         if (stagesofbuild == 1)
         {
             Wheel1.SetActive(false);
@@ -90,16 +98,12 @@ public class Campfire : MonoBehaviour
         if (stagesofbuild == maxstagesofbuild)
 
         {
-            isBuilt = true;
             Instantiate(NextBuilding, CampfireBottomMid.position, CampfirePoint.rotation);
             Instantiate(CampfireSprite, new Vector3(CampfireBottomMid.position.x + 20, CampfireBottomMid.position.y, CampfireBottomMid.position.z), CampfirePoint.rotation);
+
             DestroyCampfire();
         }
     }
-
-          
-
-    
 
     public void DestroyCampfire()
     {
